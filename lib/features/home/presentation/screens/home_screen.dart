@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:loopify/features/home/data/data.dart';
 import 'package:loopify/features/home/presentation/widgets/banner_image.dart';
 import 'package:loopify/features/home/presentation/widgets/category_item.dart';
+import 'package:loopify/features/home/presentation/widgets/custom_app_bar.dart';
+import 'package:loopify/features/home/presentation/widgets/custom_search_bar.dart';
 import 'package:loopify/features/home/presentation/widgets/promoted_item.dart';
-import 'package:loopify/features/home/presentation/widgets/section_title.dart';
+import 'package:loopify/core/widgets/section_title.dart';
+import 'package:loopify/features/listing/data/data.dart';
+import 'package:loopify/features/listing/presentation/screens/product_details_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,14 +15,22 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
-            const SizedBox(height: 50),
+            CustomAppBar(),
+            const SizedBox(height: 24),
+            CustomSearchBar(),
+            const SizedBox(height: 24),
             BannerImage(),
             const SizedBox(height: 24),
-            SectionTitle(label: 'Categories'),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: SectionTitle(label: 'Categories'),
+            ),
             const SizedBox(height: 24),
             SizedBox(
               height: 97,
@@ -26,31 +38,41 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 itemBuilder: (context, index) => CategoryItem(
-                  label: categoryItems[index].label,
-                  imagePath: categoryItems[index].imagePath,
+                  label: categories[index].label,
+                  imagePath: categories[index].imagePath,
                 ),
                 separatorBuilder: (_, _) => const SizedBox(width: 12),
-                itemCount: categoryItems.length,
+                itemCount: categories.length,
               ),
             ),
             const SizedBox(height: 36),
-            SectionTitle(label: 'Promoted Items'),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: SectionTitle(label: 'Promoted Items'),
+            ),
             const SizedBox(height: 20),
             GridView.builder(
               padding: EdgeInsets.fromLTRB(20, 4, 20, 20),
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 167,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
                 mainAxisSpacing: 24,
                 crossAxisSpacing: 16,
-                childAspectRatio: 0.6,
+                mainAxisExtent: 260,
               ),
-              itemCount: promotedItems.length,
+              itemCount: products.length,
               itemBuilder: (context, index) => PromotedItem(
-                label: promotedItems[index].label,
-                imagePath: promotedItems[index].imagePath,
-                price: promotedItems[index].price,
+                product: products[index],
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ProductDetailsScreen(product: products[index]),
+                    ),
+                  );
+                },
               ),
             ),
           ],

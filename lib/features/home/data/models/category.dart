@@ -1,11 +1,11 @@
-class PromotedItem {
+class Category {
+  final int id;
   final String label;
   final String imagePath;
-  final double price;
 
-  PromotedItem({
+  const Category({
+    required this.id,
     required this.label,
     required this.imagePath,
-    required this.price,
   });
 }

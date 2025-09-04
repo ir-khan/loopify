@@ -1,0 +1,35 @@
+class AppAssets {
+  static const bag = 'assets/images/bag.png';
+  static const bag1 = 'assets/images/bag_1.png';
+  static const bag2 = 'assets/images/bag_2.png';
+  static const bag3 = 'assets/images/bag_3.png';
+  static const bag4 = 'assets/images/bag_4.png';
+  static const banner = 'assets/images/banner.png';
+  static const coat = 'assets/images/coat.png';
+  static const jewellery = 'assets/images/jewellery.png';
+  static const loopify = 'assets/images/loopify.png';
+  static const makeup = 'assets/images/makeup.png';
+  static const promoted_1 = 'assets/images/promoted_1.png';
+  static const promoted_2 = 'assets/images/promoted_2.png';
+  static const promoted_3 = 'assets/images/promoted_3.png';
+  static const promoted_4 = 'assets/images/promoted_4.png';
+  static const promoted_5 = 'assets/images/promoted_5.png';
+  static const promoted_6 = 'assets/images/promoted_6.png';
+  static const shoe = 'assets/images/shoe.png';
+  static const sellerImage = 'assets/images/seller_image.png';
+  static const chat = 'assets/svgs/chat.svg';
+  static const chatFilled = 'assets/svgs/chat_filled.svg';
+  static const heart = 'assets/svgs/heart.svg';
+  static const heartFilled = 'assets/svgs/heart_filled.svg';
+  static const home = 'assets/svgs/home.svg';
+  static const homeFilled = 'assets/svgs/home_filled.svg';
+  static const layout = 'assets/svgs/layout.svg';
+  static const layoutFilled = 'assets/svgs/layout_filled.svg';
+  static const notification = 'assets/svgs/notification.svg';
+  static const searchFilter = 'assets/svgs/search_filter.svg';
+  static const search = 'assets/svgs/search.svg';
+  static const setting = 'assets/svgs/setting.svg';
+  static const settingFilled = 'assets/svgs/setting_filled.svg';
+  static const share = 'assets/svgs/share.svg';
+  static const arrowLeft = 'assets/svgs/arrow_left.svg';
+}
