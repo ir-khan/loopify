@@ -11,12 +11,7 @@ class SectionTitle extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         label,
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          height: 1,
-          color: Color(0xFF0D111A),
-        ),
+        style: Theme.of(context).textTheme.headlineMedium?.copyWith(height: 1),
       ),
     );
   }

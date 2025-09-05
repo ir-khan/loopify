@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loopify/core/assets/app_assets.dart';
+import 'package:loopify/core/theme/colors.dart';
 import 'package:loopify/core/utils/formaters.dart';
 import 'package:loopify/features/listing/data/model/product.dart';
 
@@ -15,7 +16,7 @@ class PromotedItem extends StatefulWidget {
 }
 
 class _PromotedItemState extends State<PromotedItem> {
-  bool isFavourite = false;
+  bool _isFavourite = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -39,35 +40,28 @@ class _PromotedItemState extends State<PromotedItem> {
               widget.product.title,
               // textAlign: TextAlign.justify,
               // softWrap: true,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: Color(0xFF4B5563),
-                height: 1.2,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   priceFormater(widget.product.price),
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    color: AppColors.black,
                     height: 1,
-                    color: Colors.black,
                   ),
                 ),
                 GestureDetector(
                   onTap: () => setState(() {
-                    isFavourite = !isFavourite;
+                    _isFavourite = !_isFavourite;
                   }),
                   child: SvgPicture.asset(
-                    widget.product.isFavorite || isFavourite
+                    widget.product.isFavorite || _isFavourite
                         ? AppAssets.heartFilled
                         : AppAssets.heart,
                     colorFilter: ColorFilter.mode(
-                      Color(0xFF32B780),
+                      AppColors.primary,
                       BlendMode.srcIn,
                     ),
                   ),

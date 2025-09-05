@@ -14,15 +14,7 @@ class SellerNoteSection extends StatelessWidget {
         const SizedBox(height: 36),
         const SectionTitle(label: 'Seller’s note'),
         const SizedBox(height: 16),
-        Text(
-          note,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            color: Color(0xFF4B5563),
-            height: 1.2,
-          ),
-        ),
+        Text(note, style: Theme.of(context).textTheme.bodyMedium),
       ],
     );
   }

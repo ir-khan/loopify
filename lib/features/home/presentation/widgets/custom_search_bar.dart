@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:loopify/core/assets/app_assets.dart';
+import 'package:loopify/core/theme/colors.dart';
 
 class CustomSearchBar extends StatefulWidget {
   const CustomSearchBar({super.key});
@@ -17,12 +18,12 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       child: TextField(
         decoration: InputDecoration(
           filled: true,
-          fillColor: Color(0xFFF3F4F6),
+          fillColor: AppColors.primaryBackgroundColor,
           hintText: 'Explore to next purchase.',
           hintStyle: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
-            color: Color(0xFFD1D5DB),
+            color: AppColors.searchHintTextColor,
           ),
           prefixIconConstraints: BoxConstraints(),
           suffixIconConstraints: BoxConstraints(),
@@ -31,14 +32,20 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             padding: const EdgeInsets.only(left: 12.0),
             child: SvgPicture.asset(
               AppAssets.search,
-              colorFilter: ColorFilter.mode(Color(0xFF6B7280), BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                AppColors.primaryIconColor,
+                BlendMode.srcIn,
+              ),
             ),
           ),
           suffixIcon: Padding(
             padding: const EdgeInsets.only(right: 12.0),
             child: SvgPicture.asset(
               AppAssets.searchFilter,
-              colorFilter: ColorFilter.mode(Color(0xFF6B7280), BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(
+                AppColors.primaryIconColor,
+                BlendMode.srcIn,
+              ),
             ),
           ),
           border: OutlineInputBorder(

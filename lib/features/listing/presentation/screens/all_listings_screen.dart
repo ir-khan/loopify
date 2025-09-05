@@ -7,7 +7,6 @@ class AllListingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
       body: Center(child: Text('All Listing Page')),
     );
   }

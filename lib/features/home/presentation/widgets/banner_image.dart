@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loopify/core/theme/colors.dart';
 
 class BannerImage extends StatelessWidget {
   const BannerImage({super.key});
@@ -33,7 +34,7 @@ class BannerImage extends StatelessWidget {
                     ),
                   ],
                   style: TextStyle(
-                    color: Colors.white,
+                    color: AppColors.white,
                     fontSize: 16,
                     letterSpacing: 16 * 0.39,
                     height: 1,

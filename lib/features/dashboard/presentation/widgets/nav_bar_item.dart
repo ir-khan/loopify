@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:loopify/core/theme/colors.dart';
 
 class NavBarItem extends StatelessWidget {
   const NavBarItem({
@@ -19,7 +20,7 @@ class NavBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isSelected ? Colors.black : Color(0xFF6B7280);
+    final color = isSelected ? AppColors.black : AppColors.secondaryTextColor;
     final fontWeight = isSelected ? FontWeight.w500 : FontWeight.w400;
 
     return GestureDetector(
@@ -37,10 +38,10 @@ class NavBarItem extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               label,
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: fontWeight,
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
                 color: color,
+                fontWeight: fontWeight,
+                height: 16 / 12,
               ),
             ),
           ],

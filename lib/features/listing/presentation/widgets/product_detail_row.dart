@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loopify/core/theme/colors.dart';
 
 class ProductDetailRow extends StatelessWidget {
   final String label;
@@ -19,12 +20,13 @@ class ProductDetailRow extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            color: Color(0xFF4B5563),
-            height: 1.2,
-          ),
+          style: Theme.of(context).textTheme.bodyLarge,
+          // style: const TextStyle(
+          //   fontSize: 16,
+          //   fontWeight: FontWeight.w400,
+          //   color: Color(0xFF4B5563),
+          //   height: 1.2,
+          // ),
         ),
         Row(
           children: [
@@ -33,7 +35,7 @@ class ProductDetailRow extends StatelessWidget {
                 margin: const EdgeInsets.only(right: 4),
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFECFDF5),
+                  color: AppColors.greenContainerBackgroundColor,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: const Text(
@@ -42,18 +44,15 @@ class ProductDetailRow extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w400,
-                    color: Color(0xFF32B780),
+                    color: AppColors.greenTextColor,
                   ),
                 ),
               ),
             Text(
               value,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF4B5563),
-                height: 1.2,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
             ),
           ],
         ),

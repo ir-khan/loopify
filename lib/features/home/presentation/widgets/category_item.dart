@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loopify/core/theme/colors.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem({super.key, required this.label, required this.imagePath});
@@ -16,7 +17,7 @@ class CategoryItem extends StatelessWidget {
           height: 72,
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: Color(0xFFF3F4F6),
+            color: AppColors.primaryBackgroundColor,
             shape: BoxShape.circle,
           ),
           child: Image.asset(imagePath),
@@ -24,11 +25,9 @@ class CategoryItem extends StatelessWidget {
         Text(
           label,
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: AppColors.tertiaryTextColor,
             height: 1,
-            color: Color(0xFF374151),
           ),
         ),
       ],

@@ -16,23 +16,10 @@ class SellerDetailsCard extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'John Doe',
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF0D111A),
-                height: 1.2,
-              ),
-            ),
+            Text('John Doe', style: Theme.of(context).textTheme.headlineMedium),
             Text(
               'Joined Since 2019',
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: Color(0xFF6B7280),
-                height: 1.2,
-              ),
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ],
         ),

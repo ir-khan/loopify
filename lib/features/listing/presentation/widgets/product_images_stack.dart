@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loopify/core/assets/app_assets.dart';
+import 'package:loopify/core/theme/colors.dart';
 import 'package:loopify/core/widgets/circle_icon_container.dart';
 
 class ProductImagesStack extends StatefulWidget {
@@ -22,10 +23,10 @@ class ProductImagesStack extends StatefulWidget {
 }
 
 class _ProductImagesStackState extends State<ProductImagesStack> {
-  late int currentIndex = 0;
+  late int _currentIndex = 0;
 
   void moveToPage(int newIndex) {
-    currentIndex = newIndex;
+    _currentIndex = newIndex;
     setState(() {});
   }
 
@@ -83,7 +84,7 @@ class _ProductImagesStackState extends State<ProductImagesStack> {
                       width: 12.1,
                       height: 15,
                       colorFilter: const ColorFilter.mode(
-                        Colors.white,
+                        AppColors.white,
                         BlendMode.srcIn,
                       ),
                     ),
@@ -123,15 +124,16 @@ class _ProductImagesStackState extends State<ProductImagesStack> {
               children: List.generate(
                 widget.imagePaths.length,
                 (index) => Container(
-                  width: currentIndex == index ? 8 : 6,
-                  height: currentIndex == index ? 8 : 6,
+                  width: _currentIndex == index ? 8 : 6,
+                  height: _currentIndex == index ? 8 : 6,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: currentIndex == index
-                        ? Color(0xFFF3F4F6)
-                        : currentIndex - 1 == index || currentIndex + 1 == index
-                        ? Color(0x80FFFFFF)
-                        : Color(0x1AFFFFFF),
+                    color: _currentIndex == index
+                        ? AppColors.primaryBackgroundColor
+                        : _currentIndex - 1 == index ||
+                              _currentIndex + 1 == index
+                        ? AppColors.white.withAlpha(0x80)
+                        : AppColors.white.withAlpha(0x1A),
                   ),
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:loopify/core/theme/colors.dart';
 
 class CircleIconContainer extends StatelessWidget {
   const CircleIconContainer({
@@ -25,7 +26,7 @@ class CircleIconContainer extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: containerColor ?? Colors.white,
+          color: containerColor ?? AppColors.white,
           boxShadow: [
             BoxShadow(
               offset: Offset(0, 4),
@@ -39,7 +40,7 @@ class CircleIconContainer extends StatelessWidget {
         child: SvgPicture.asset(
           svgPath,
           colorFilter: ColorFilter.mode(
-            svgColor ?? Color(0xFF6B7280),
+            svgColor ?? AppColors.primaryIconColor,
             BlendMode.srcIn,
           ),
         ),

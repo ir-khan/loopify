@@ -16,12 +16,11 @@ class CustomAppBar extends StatelessWidget {
         titleSpacing: 12,
         title: Text(
           'Good Morning, Alex!',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Color(0xFF0D111A),
-          ),
         ),
+        // TODO: text height issue
+        titleTextStyle: Theme.of(
+          context,
+        ).textTheme.titleMedium?.copyWith(height: 1),
         actions: [
           CircleIconContainer(svgPath: AppAssets.heart, onTap: () {}),
           const SizedBox(width: 8),
