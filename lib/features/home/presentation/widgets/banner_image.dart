@@ -14,31 +14,27 @@ class BannerImage extends StatelessWidget {
           children: [
             Image.asset(
               'assets/images/banner.png',
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
               width: double.infinity,
               height: 140,
             ),
             Positioned(
               top: 64,
               left: 30,
-              child: RichText(
-                text: TextSpan(
+              child: Text.rich(
+                TextSpan(
+                  text: 'GET THEM ',
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    fontWeight: FontWeight.w200,
+                    color: AppColors.white,
+                    letterSpacing: 16 * 0.39,
+                  ),
                   children: [
                     TextSpan(
-                      text: 'GET THEM ',
-                      style: TextStyle(fontWeight: FontWeight.w200),
-                    ),
-                    TextSpan(
                       text: 'ALL',
-                      style: TextStyle(fontWeight: FontWeight.w500),
+                      style: TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ],
-                  style: TextStyle(
-                    color: AppColors.white,
-                    fontSize: 16,
-                    letterSpacing: 16 * 0.39,
-                    height: 1,
-                  ),
                 ),
               ),
             ),

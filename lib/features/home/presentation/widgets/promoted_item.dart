@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loopify/core/assets/app_assets.dart';
 import 'package:loopify/core/theme/colors.dart';
 import 'package:loopify/core/utils/formaters.dart';
-import 'package:loopify/features/listing/data/model/product.dart';
+import 'package:loopify/features/listing/data/model/product/product.dart';
 
 class PromotedItem extends StatefulWidget {
   const PromotedItem({super.key, required this.product, required this.onTap});

@@ -33,9 +33,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: AppColors.primary
+            color: AppColors.primary,
           ),
-          child: Icon(Icons.add_rounded, color: Colors.white, size: 22),
+          child: Icon(Icons.add_rounded, color: AppColors.white, size: 22),
         ),
       ),
       bottomNavigationBar: BottomAppBar(

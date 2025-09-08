@@ -14,9 +14,7 @@ class CustomAppBar extends StatelessWidget {
         leading: Image.asset('assets/images/loopify.png'),
         leadingWidth: 30.27,
         titleSpacing: 12,
-        title: Text(
-          'Good Morning, Alex!',
-        ),
+        title: Text('Good Morning, Alex!'),
         // TODO: text height issue
         titleTextStyle: Theme.of(
           context,

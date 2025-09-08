@@ -4,6 +4,8 @@ class AppColors {
   static const primary = Color(0xFF32B780);
   static const white = Color(0xFFFFFFFF);
   static const black = Color(0xFF000000);
+  static const red = Color(0xFFDC2626);
+  static const error = Color(0xFFEF4444);
 
   // Text Colors
   static const primaryTextColor = Color(0xFF4B5563);
@@ -21,9 +23,15 @@ class AppColors {
 
   // Icon Colors
   static const primaryIconColor = Color(0xFF6B7280);
+  static const secondaryIconColor = Color(0xFF9CA3AF);
+
+  // Switch Colors
+  static const inactiveSwitchColor = Color(0xFF6F6F76);
 
   // Background Colors
   static const primaryBackgroundColor = Color(0xFFF3F4F6);
+  static const secondaryBackgroundColor = Color(0xFFEEEDED);
   static const greenContainerBackgroundColor = Color(0xFFECFDF5);
   static const blueContainerBackgroundColor = Color(0xFFEFF6FF);
+  static const redContainerBackgroundColor = Color(0xFFFEF2F2);
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loopify/core/widgets/section_title.dart';
-import 'package:loopify/features/listing/data/model/product.dart';
+import 'package:loopify/features/listing/data/model/product/product.dart';
 import 'package:loopify/features/listing/presentation/widgets/action_buttons.dart';
 import 'package:loopify/features/listing/presentation/widgets/product_details_section.dart';
 import 'package:loopify/features/listing/presentation/widgets/product_images_stack.dart';

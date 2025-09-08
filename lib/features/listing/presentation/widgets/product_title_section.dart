@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loopify/features/listing/data/model/product.dart';
+import 'package:loopify/features/listing/data/model/product/product.dart';
 
 class ProductTitleSection extends StatelessWidget {
   const ProductTitleSection({super.key, required this.product});

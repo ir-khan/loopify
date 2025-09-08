@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to your photo library so you can select and upload images when creating listings.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to your camera so you can take photos directly to add to your listings.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need access to your microphone so you can record audio when capturing videos for your listings.</string>
 </dict>
 </plist>

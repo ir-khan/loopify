@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loopify/core/utils/formaters.dart';
 import 'package:loopify/core/widgets/section_title.dart';
-import 'package:loopify/features/listing/data/model/product.dart';
+import 'package:loopify/features/listing/data/model/product/product.dart';
 import 'package:loopify/features/listing/presentation/widgets/product_detail_row.dart';
 
 class ProductDetailsSection extends StatelessWidget {
@@ -26,9 +26,9 @@ class ProductDetailsSection extends StatelessWidget {
         const SizedBox(height: 16),
         ProductDetailRow(label: 'Category', value: product.category.label),
         const SizedBox(height: 16),
-        ProductDetailRow(label: 'Location', value: product.location),
+        ProductDetailRow(label: 'Location', value: product.location.name),
         const SizedBox(height: 16),
-        ProductDetailRow(label: 'Material', value: product.material),
+        ProductDetailRow(label: 'Material', value: product.material.label),
         const SizedBox(height: 16),
         ProductDetailRow(label: 'Color', value: product.color),
       ],

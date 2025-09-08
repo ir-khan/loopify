@@ -1,7 +1,8 @@
 import 'package:loopify/core/assets/app_assets.dart';
-import 'package:loopify/features/home/data/models/category.dart';
-import 'package:loopify/features/listing/data/model/condition.dart';
-import 'package:loopify/features/listing/data/model/product.dart';
+import 'package:loopify/features/listing/data/model/ad_spend_mode/ad_spend_mode.dart';
+import 'package:loopify/features/listing/data/model/category/category.dart';
+import 'package:loopify/features/listing/data/model/location/location.dart';
+import 'package:loopify/features/listing/data/model/product/product.dart';
 
 const List<Product> products = [
   Product(
@@ -11,10 +12,10 @@ const List<Product> products = [
         'Elevate your style with this luxurious Gucci laptop bag, beautifully adorned with exquisite pearls and elegant gold accents. Perfect for the modern professional, this bag combines functionality with high fashion, ensuring your laptop is both secure and stylish.',
     isNegotiable: true,
     isFavorite: false,
-    condition: Condition(id: 1, label: 'Excellent'),
+    condition: Condition.excellent,
     category: Category(id: 2, label: 'Bags', imagePath: AppAssets.bag),
-    location: 'New York',
-    material: 'Leather',
+    location: Location(id: 1, name: 'New York'),
+    material: MaterialType.leather,
     color: 'Brown',
     imagePaths: [
       AppAssets.promoted_1,
@@ -34,10 +35,10 @@ const List<Product> products = [
         'Elevate your style with this luxurious Gucci laptop bag, beautifully adorned with exquisite pearls and elegant gold accents. Perfect for the modern professional, this bag combines functionality with high fashion, ensuring your laptop is both secure and stylish.',
     isNegotiable: true,
     isFavorite: false,
-    condition: Condition(id: 1, label: 'Excellent'),
+    condition: Condition.excellent,
     category: Category(id: 2, label: 'Bags', imagePath: AppAssets.bag),
-    location: 'New York',
-    material: 'Leather',
+    location: Location(id: 1, name: 'New York'),
+    material: MaterialType.leather,
     color: 'Brown',
     imagePaths: [AppAssets.promoted_2],
     price: 780.0,
@@ -49,10 +50,10 @@ const List<Product> products = [
         'Elevate your style with this luxurious Gucci laptop bag, beautifully adorned with exquisite pearls and elegant gold accents. Perfect for the modern professional, this bag combines functionality with high fashion, ensuring your laptop is both secure and stylish.',
     isNegotiable: true,
     isFavorite: false,
-    condition: Condition(id: 1, label: 'Excellent'),
+    condition: Condition.excellent,
     category: Category(id: 2, label: 'Bags', imagePath: AppAssets.bag),
-    location: 'New York',
-    material: 'Leather',
+    location: Location(id: 1, name: 'New York'),
+    material: MaterialType.leather,
     color: 'Brown',
     imagePaths: [AppAssets.promoted_3],
     price: 650.0,
@@ -64,10 +65,10 @@ const List<Product> products = [
         'Elevate your style with this luxurious Gucci laptop bag, beautifully adorned with exquisite pearls and elegant gold accents. Perfect for the modern professional, this bag combines functionality with high fashion, ensuring your laptop is both secure and stylish.',
     isNegotiable: true,
     isFavorite: false,
-    condition: Condition(id: 1, label: 'Excellent'),
+    condition: Condition.excellent,
     category: Category(id: 2, label: 'Bags', imagePath: AppAssets.bag),
-    location: 'New York',
-    material: 'Leather',
+    location: Location(id: 1, name: 'New York'),
+    material: MaterialType.leather,
     color: 'Brown',
     imagePaths: [AppAssets.promoted_4],
     price: 1050.0,
@@ -79,10 +80,10 @@ const List<Product> products = [
         'Elevate your style with this luxurious Gucci laptop bag, beautifully adorned with exquisite pearls and elegant gold accents. Perfect for the modern professional, this bag combines functionality with high fashion, ensuring your laptop is both secure and stylish.',
     isNegotiable: true,
     isFavorite: false,
-    condition: Condition(id: 1, label: 'Excellent'),
+    condition: Condition.excellent,
     category: Category(id: 2, label: 'Bags', imagePath: AppAssets.bag),
-    location: 'New York',
-    material: 'Leather',
+    location: Location(id: 1, name: 'New York'),
+    material: MaterialType.leather,
     color: 'Brown',
     imagePaths: [AppAssets.promoted_5],
     price: 1200.0,
@@ -94,12 +95,52 @@ const List<Product> products = [
         'Elevate your style with this luxurious Gucci laptop bag, beautifully adorned with exquisite pearls and elegant gold accents. Perfect for the modern professional, this bag combines functionality with high fashion, ensuring your laptop is both secure and stylish.',
     isNegotiable: true,
     isFavorite: false,
-    condition: Condition(id: 1, label: 'Excellent'),
+    condition: Condition.excellent,
     category: Category(id: 2, label: 'Bags', imagePath: AppAssets.bag),
-    location: 'New York',
-    material: 'Leather',
+    location: Location(id: 1, name: 'New York'),
+    material: MaterialType.leather,
     color: 'Brown',
     imagePaths: [AppAssets.promoted_6],
     price: 430.0,
+  ),
+];
+
+const locations = <Location>[
+  Location(id: 1, name: "Karachi"),
+  Location(id: 2, name: "Lahore"),
+  Location(id: 3, name: "Islamabad"),
+  Location(id: 4, name: "Rawalpindi"),
+  Location(id: 5, name: "Faisalabad"),
+  Location(id: 6, name: "Multan"),
+  Location(id: 7, name: "Peshawar"),
+  Location(id: 8, name: "Quetta"),
+  Location(id: 9, name: "Hyderabad"),
+  Location(id: 10, name: "Sialkot"),
+];
+
+const packages = <AdSpendMode>[
+  AdSpendMode.package(
+    packageId: 1,
+    name: 'Feature Ad',
+    price: 350,
+    duration: Duration(days: 30),
+  ),
+  AdSpendMode.package(
+    packageId: 2,
+    name: 'Feature Ad',
+    price: 250,
+    duration: Duration(days: 15),
+  ),
+  AdSpendMode.package(
+    packageId: 3,
+    name: 'Feature Ad',
+    price: 150,
+    duration: Duration(days: 7),
+  ),
+  AdSpendMode.package(
+    packageId: 4,
+    name: 'Feature Ad',
+    price: 50,
+    duration: Duration(days: 3),
   ),
 ];
