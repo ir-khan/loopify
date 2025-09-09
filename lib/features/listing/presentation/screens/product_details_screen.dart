@@ -16,6 +16,7 @@ class ProductDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(product);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

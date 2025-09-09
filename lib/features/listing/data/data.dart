@@ -4,7 +4,7 @@ import 'package:loopify/features/listing/data/model/category/category.dart';
 import 'package:loopify/features/listing/data/model/location/location.dart';
 import 'package:loopify/features/listing/data/model/product/product.dart';
 
-const List<Product> products = [
+const List<Product> dummyProducts = [
   Product(
     id: 1,
     title: 'Luxurious Gucci Laptop Bag Embellished with Stunning Pearls',
@@ -55,7 +55,13 @@ const List<Product> products = [
     location: Location(id: 1, name: 'New York'),
     material: MaterialType.leather,
     color: 'Brown',
-    imagePaths: [AppAssets.promoted_3],
+    imagePaths: [
+      AppAssets.promoted_3,
+      AppAssets.bag1,
+      AppAssets.bag2,
+      AppAssets.bag3,
+      AppAssets.bag4,
+    ],
     price: 650.0,
   ),
   Product(
@@ -70,7 +76,13 @@ const List<Product> products = [
     location: Location(id: 1, name: 'New York'),
     material: MaterialType.leather,
     color: 'Brown',
-    imagePaths: [AppAssets.promoted_4],
+    imagePaths: [
+      AppAssets.promoted_4,
+      AppAssets.bag1,
+      AppAssets.bag2,
+      AppAssets.bag3,
+      AppAssets.bag4,
+    ],
     price: 1050.0,
   ),
   Product(
@@ -85,7 +97,13 @@ const List<Product> products = [
     location: Location(id: 1, name: 'New York'),
     material: MaterialType.leather,
     color: 'Brown',
-    imagePaths: [AppAssets.promoted_5],
+    imagePaths: [
+      AppAssets.promoted_5,
+      AppAssets.bag1,
+      AppAssets.bag2,
+      AppAssets.bag3,
+      AppAssets.bag4,
+    ],
     price: 1200.0,
   ),
   Product(
@@ -100,12 +118,18 @@ const List<Product> products = [
     location: Location(id: 1, name: 'New York'),
     material: MaterialType.leather,
     color: 'Brown',
-    imagePaths: [AppAssets.promoted_6],
+    imagePaths: [
+      AppAssets.promoted_6,
+      AppAssets.bag1,
+      AppAssets.bag2,
+      AppAssets.bag3,
+      AppAssets.bag4,
+    ],
     price: 430.0,
   ),
 ];
 
-const locations = <Location>[
+const dummyLocations = <Location>[
   Location(id: 1, name: "Karachi"),
   Location(id: 2, name: "Lahore"),
   Location(id: 3, name: "Islamabad"),
@@ -118,7 +142,7 @@ const locations = <Location>[
   Location(id: 10, name: "Sialkot"),
 ];
 
-const packages = <AdSpendMode>[
+const dummyPackages = <AdSpendMode>[
   AdSpendMode.package(
     packageId: 1,
     name: 'Feature Ad',

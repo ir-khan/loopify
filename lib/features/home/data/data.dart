@@ -1,7 +1,7 @@
 import 'package:loopify/core/assets/app_assets.dart';
 import 'package:loopify/features/listing/data/model/category/category.dart';
 
-const List<Category> categories = [
+const List<Category> dummyCategories = [
   Category(id: 1, label: 'Free Items', imagePath: AppAssets.shoe),
   Category(id: 2, label: 'Bags', imagePath: AppAssets.bag),
   Category(id: 3, label: 'Designer Items', imagePath: AppAssets.coat),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loopify/core/assets/app_assets.dart';
@@ -42,11 +44,24 @@ class _ProductImagesStackState extends State<ProductImagesStack> {
             itemBuilder: (context, index) {
               return Stack(
                 children: [
-                  Image.asset(
-                    widget.imagePaths[index],
-                    fit: BoxFit.cover,
-                    width: MediaQuery.of(context).size.width,
-                  ),
+                  widget.imagePaths[0].startsWith('/')
+                      ? Image.file(
+                          File(widget.imagePaths[index]),
+                          fit: BoxFit.cover,
+                          width: MediaQuery.of(context).size.width,
+                          height: double.infinity,
+                        )
+                      : Image.asset(
+                          widget.imagePaths[index],
+                          fit: BoxFit.fill,
+                          width: MediaQuery.of(context).size.width,
+                          height: double.infinity,
+                        ),
+                  // Image.asset(
+                  //   widget.imagePaths[index],
+                  //   fit: BoxFit.cover,
+                  //   width: MediaQuery.of(context).size.width,
+                  // ),
                   Positioned(
                     bottom: 0,
                     left: 0,

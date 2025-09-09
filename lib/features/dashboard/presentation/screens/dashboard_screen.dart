@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:loopify/core/assets/app_assets.dart';
 import 'package:loopify/core/theme/colors.dart';
-import 'package:loopify/features/dashboard/data/data.dart';
 import 'package:loopify/features/dashboard/presentation/widgets/nav_bar_item.dart';
+import 'package:loopify/features/home/presentation/screens/home_screen.dart';
+import 'package:loopify/features/listing/presentation/screens/all_listings_screen.dart';
 import 'package:loopify/features/listing/presentation/screens/create_listing_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -16,6 +17,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    const dashboardScreen = [
+      HomeScreen(),
+      AllListingsScreen(),
+      ChatScreen(),
+      SettingScreen(),
+    ];
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: dashboardScreen[_currentIndex],
@@ -25,7 +32,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => CreateListingScreen()),
-          );
+          ).then((val) {
+            // if (val) {
+            setState(() {});
+            // }
+          });
         },
         child: Container(
           width: 32,

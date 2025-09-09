@@ -19,7 +19,7 @@ class ProductDetailsSection extends StatelessWidget {
         ProductDetailRow(
           label: 'Price',
           value: priceFormater(product.price),
-          showNegotiable: true,
+          showNegotiable: product.isNegotiable,
         ),
         const SizedBox(height: 16),
         ProductDetailRow(label: 'Condition', value: product.condition.label),

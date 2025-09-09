@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:loopify/features/listing/data/data_source/product_local_data_source.dart';
 import 'package:loopify/features/listing/data/mapper/product_mapper.dart';
 import 'package:loopify/features/listing/data/model/product/product.dart';
@@ -13,7 +15,7 @@ class ProductLocalRepository implements ProductRepository {
     try {
       await _productLocalDataSource.createProduct(product.toCompanion());
     } catch (e) {
-      print('Product Local Repository: $e');
+      log('Product Local Repository: $e');
     }
   }
 
@@ -22,7 +24,7 @@ class ProductLocalRepository implements ProductRepository {
     try {
       await _productLocalDataSource.deleteProductById(id);
     } catch (e) {
-      print('Product Local Repository: $e');
+      log('Product Local Repository: $e');
     }
   }
 
@@ -32,7 +34,7 @@ class ProductLocalRepository implements ProductRepository {
       final products = await _productLocalDataSource.getAllProducts();
       return products.map((p) => p.toProduct()).toList();
     } catch (e) {
-      print('Product Local Repository: $e');
+      log('Product Local Repository: $e');
       return [];
     }
   }
@@ -44,7 +46,7 @@ class ProductLocalRepository implements ProductRepository {
       if (product == null) return null;
       return product.toProduct();
     } catch (e) {
-      print('Product Local Repository: $e');
+      log('Product Local Repository: $e');
       return null;
     }
   }
@@ -54,7 +56,7 @@ class ProductLocalRepository implements ProductRepository {
     try {
       await _productLocalDataSource.updateProduct(product.toCompanion());
     } catch (e) {
-      print('Product Local Repository: $e');
+      log('Product Local Repository: $e');
     }
   }
 }

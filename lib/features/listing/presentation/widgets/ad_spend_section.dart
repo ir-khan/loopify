@@ -15,7 +15,7 @@ class AdSpendSection extends StatefulWidget {
     required this.isAdSpend,
     required this.onToggle,
     required this.onAdSpendChanged,
-    this.currentAdSpend
+    this.currentAdSpend,
   });
 
   @override
@@ -26,27 +26,27 @@ class _AdSpendSectionState extends State<AdSpendSection> {
   final _amountController = TextEditingController();
   final _daysController = TextEditingController();
 
-  AdSpendModeType _adSpendMode = AdSpendModeType.packages;
+  AdSpendModeType? _adSpendMode; //  = AdSpendModeType.packages
   PackageAdSpend? _selectedPackage;
 
   @override
   void initState() {
     super.initState();
 
-     if (widget.currentAdSpend case final adSpend?) {
-    switch (adSpend) {
-      case PackageAdSpend():
-        _adSpendMode = AdSpendModeType.packages;
-        _selectedPackage = adSpend;
-        break;
+    if (widget.currentAdSpend case final adSpend?) {
+      switch (adSpend) {
+        case PackageAdSpend():
+          _adSpendMode = AdSpendModeType.packages;
+          _selectedPackage = adSpend;
+          break;
 
-      case ManualAdSpend():
-        _adSpendMode = AdSpendModeType.manual;
-        _amountController.text = adSpend.budget.toStringAsFixed(0);
-        _daysController.text = adSpend.days.toString();
-        break;
+        case ManualAdSpend():
+          _adSpendMode = AdSpendModeType.manual;
+          _amountController.text = adSpend.budget.toStringAsFixed(0);
+          _daysController.text = adSpend.days.toString();
+          break;
+      }
     }
-  }
   }
 
   @override
@@ -78,6 +78,8 @@ class _AdSpendSectionState extends State<AdSpendSection> {
           widget.onAdSpendChanged(null);
         }
         break;
+      case null:
+        widget.onAdSpendChanged(null);
     }
   }
 
@@ -136,11 +138,13 @@ class _AdSpendSectionState extends State<AdSpendSection> {
               ),
             ],
           ),
-          const SizedBox(height: 48),
+          if (_adSpendMode == AdSpendModeType.packages ||
+              _adSpendMode == AdSpendModeType.manual)
+            const SizedBox(height: 48),
           if (_adSpendMode == AdSpendModeType.packages)
             Column(
               spacing: 16,
-              children: packages.map((package) {
+              children: dummyPackages.map((package) {
                 return switch (package) {
                   PackageAdSpend() => GestureDetector(
                     onTap: () {

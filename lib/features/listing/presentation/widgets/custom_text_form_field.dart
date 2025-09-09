@@ -11,8 +11,8 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final ValueChanged<String>? onChanged;
+  final TextStyle? style;
 
-  // TODO: textStyle as parameter
   const CustomTextFormField({
     super.key,
     required this.label,
@@ -24,6 +24,7 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.onChanged,
+    this.style,
   });
 
   @override
@@ -34,7 +35,7 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscureText,
       maxLines: null,
       onChanged: onChanged,
-      style: Theme.of(context).textTheme.labelMedium,
+      style: style ?? Theme.of(context).textTheme.labelMedium,
       validator:
           validator ??
           (val) {

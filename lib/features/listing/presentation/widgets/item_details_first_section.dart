@@ -36,6 +36,9 @@ class ItemDetailsFirstSection extends StatelessWidget {
         CustomTextFormField(
           label: 'Description',
           controller: descriptionController,
+          style: Theme.of(
+            context,
+          ).textTheme.labelMedium?.copyWith(letterSpacing: 14 * 0.05),
         ),
       ],
     );

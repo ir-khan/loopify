@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart' hide MaterialType;
-import 'package:loopify/app.dart';
 import 'package:loopify/core/widgets/custom_preferred_sized_app_bar.dart';
 import 'package:loopify/features/home/data/data.dart';
 import 'package:loopify/features/listing/data/data.dart';
@@ -13,6 +12,7 @@ import 'package:loopify/features/listing/presentation/widgets/item_details_first
 import 'package:loopify/features/listing/presentation/widgets/item_details_second_section.dart';
 import 'package:loopify/features/listing/presentation/widgets/price_section.dart';
 import 'package:loopify/features/listing/presentation/widgets/note_section.dart';
+import 'package:loopify/main.dart';
 
 class CreateListingScreen extends StatefulWidget {
   const CreateListingScreen({super.key, this.product});
@@ -103,33 +103,38 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
     _isFormValid.value = allTextFilled && allDropdownsSelected;
   }
 
-  void _submitForm() {
-    if (_formKey.currentState?.validate() ?? false) {
-      final product = Product(
-        id: widget.product?.id,
-        title: titleController.text.trim(),
-        imagePaths: _selectedImages!,
-        description: descriptionController.text.trim(),
-        price: double.parse(priceController.text.trim()),
-        isNegotiable: _isNegotiable,
-        condition: _selectedCondition!,
-        category: _selectedCategory!,
-        location: _selectedLocation!,
-        material: _selectedMaterial!,
-        color: colorController.text.trim(),
-        note: noteController.text.trim(),
-        adSpend: _adSpendMode,
-      );
-      print(product);
-      if (widget.product == null) {
-        print(" Creating listing...");
-        productLocalRepository.createProduct(product);
-      } else {
-        print(" Updating listing...");
-        productLocalRepository.updateProduct(product);
-      }
+  Future<void> _submitForm() async {
+    if (!(_formKey.currentState?.validate() ?? false)) return;
+    final product = Product(
+      id: widget.product?.id,
+      title: titleController.text.trim(),
+      imagePaths: _selectedImages!,
+      description: descriptionController.text.trim(),
+      price: double.parse(priceController.text.trim()),
+      isNegotiable: _isNegotiable,
+      condition: _selectedCondition!,
+      category: _selectedCategory!,
+      location: _selectedLocation!,
+      material: _selectedMaterial!,
+      color: colorController.text.trim(),
+      note: noteController.text.trim().isEmpty
+          ? null
+          : noteController.text.trim(),
+      adSpend: _adSpendMode,
+    );
+    if (widget.product == null) {
+      productLocalRepository.createProduct(product).then((val) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Product created successfully!')),
+        );
+      });
     } else {
-      print(" Validation failed");
+      productLocalRepository.updateProduct(product).then((val) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Product updated successfully!')),
+        );
+        // Navigator.pop(context, true);
+      });
     }
   }
 
@@ -165,7 +170,6 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                     onToggle: (val) {
                       setState(() {
                         _isAdSpend = val;
-                        _updateFormValidState();
                       });
                     },
                     onAdSpendChanged: (val) {
@@ -177,7 +181,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                   ),
                   const SizedBox(height: 48),
                   ItemDetailsFirstSection(
-                    categories: categories.take(5).toList(),
+                    categories: dummyCategories.take(5).toList(),
                     selectedCategory: _selectedCategory,
                     titleController: titleController,
                     descriptionController: descriptionController,
@@ -198,7 +202,7 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
                   ),
                   const SizedBox(height: 48),
                   ItemDetailsSecondSection(
-                    locations: locations,
+                    locations: dummyLocations,
                     selectedCondition: _selectedCondition,
                     selectedLocation: _selectedLocation,
                     selectedMaterial: _selectedMaterial,

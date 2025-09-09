@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loopify/core/assets/app_assets.dart';
@@ -29,12 +31,19 @@ class _PromotedItemState extends State<PromotedItem> {
           children: [
             ClipRRect(
               borderRadius: BorderRadiusGeometry.circular(4),
-              child: Image.asset(
-                widget.product.imagePaths[0],
-                fit: BoxFit.cover,
-                width: 167,
-                height: 167,
-              ),
+              child: widget.product.imagePaths[0].startsWith('/')
+                  ? Image.file(
+                      File(widget.product.imagePaths[0]),
+                      fit: BoxFit.cover,
+                      width: 167,
+                      height: 167,
+                    )
+                  : Image.asset(
+                      widget.product.imagePaths[0],
+                      fit: BoxFit.cover,
+                      width: 167,
+                      height: 167,
+                    ),
             ),
             Text(
               widget.product.title,

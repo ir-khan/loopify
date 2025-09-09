@@ -20,7 +20,7 @@ class CustomPreferredSizedAppBar extends StatelessWidget
         automaticallyImplyLeading: false,
         forceMaterialTransparency: true,
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pop(context, true),
           icon: SvgPicture.asset(
             AppAssets.arrowLeft,
             colorFilter: ColorFilter.mode(

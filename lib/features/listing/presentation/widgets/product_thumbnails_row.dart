@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class ProductThumbnailsRow extends StatelessWidget {
@@ -18,12 +20,25 @@ class ProductThumbnailsRow extends StatelessWidget {
         imagePaths.length - 1,
         (index) => ClipRRect(
           borderRadius: BorderRadius.circular(2),
-          child: Image.asset(
-            imagePaths[index + 1],
-            width: 72,
-            height: 72,
-            fit: BoxFit.cover,
-          ),
+          child: imagePaths[index + 1].startsWith('/')
+              ? Image.file(
+                  File(imagePaths[index + 1]),
+                  fit: BoxFit.cover,
+                  width: 72,
+                  height: 72,
+                )
+              : Image.asset(
+                  imagePaths[index + 1],
+                  fit: BoxFit.cover,
+                  width: 72,
+                  height: 72,
+                ),
+          //  Image.asset(
+          //   imagePaths[index + 1],
+          //   width: 72,
+          //   height: 72,
+          //   fit: BoxFit.cover,
+          // ),
         ),
       ),
     );
