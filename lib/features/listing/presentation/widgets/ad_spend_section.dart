@@ -148,7 +148,11 @@ class _AdSpendSectionState extends State<AdSpendSection> {
                 return switch (package) {
                   PackageAdSpend() => GestureDetector(
                     onTap: () {
-                      setState(() => _selectedPackage = package);
+                      setState(
+                        () => _selectedPackage = _selectedPackage == package
+                            ? null
+                            : package,
+                      );
                       _emitAdSpendMode();
                     },
                     child: _PackageCard(

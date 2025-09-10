@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:loopify/core/theme/colors.dart';
 
 class ImagePickerSlot extends StatelessWidget {
-  final File? image;
+  final String? image;
   final VoidCallback onAdd;
   final VoidCallback? onRemove;
 
@@ -28,7 +28,12 @@ class ImagePickerSlot extends StatelessWidget {
               color: AppColors.secondaryBackgroundColor,
               borderRadius: BorderRadius.circular(2),
               image: image != null
-                  ? DecorationImage(image: FileImage(image!), fit: BoxFit.cover)
+                  ? DecorationImage(
+                      image: image!.startsWith('/')
+                          ? FileImage(File(image!))
+                          : AssetImage(image!),
+                      fit: BoxFit.cover,
+                    )
                   : null,
             ),
             child: image == null

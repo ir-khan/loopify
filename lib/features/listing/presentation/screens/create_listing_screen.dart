@@ -120,21 +120,19 @@ class _CreateListingScreenState extends State<CreateListingScreen> {
       note: noteController.text.trim().isEmpty
           ? null
           : noteController.text.trim(),
-      adSpend: _adSpendMode,
+      adSpend: _isAdSpend ? _adSpendMode : null,
     );
     if (widget.product == null) {
-      productLocalRepository.createProduct(product).then((val) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Product created successfully!')),
-        );
-      });
+      productLocalRepository.createProduct(product);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Product created successfully!')));
     } else {
-      productLocalRepository.updateProduct(product).then((val) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Product updated successfully!')),
-        );
-        // Navigator.pop(context, true);
-      });
+      productLocalRepository.updateProduct(product);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Product updated successfully!')));
+      // Navigator.pop(context, true);
     }
   }
 

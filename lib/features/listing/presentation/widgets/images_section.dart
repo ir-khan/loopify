@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:loopify/core/services/image_service.dart';
 import 'package:loopify/features/listing/presentation/widgets/image_picker_slot.dart';
@@ -36,8 +34,13 @@ class _ImagesSectionState extends State<ImagesSection> {
     }
   }
 
-  void _removeImage(int index) {
-    final updated = [...widget.selectedImages]..removeAt(index);
+  void _removeImage(int index) async {
+    final updated = [...widget.selectedImages];
+    final imagePath = updated[index];
+
+    await _imageService.deleteImage(imagePath);
+
+    updated.removeAt(index);
     widget.onImagesChanged(updated);
   }
 
@@ -56,9 +59,8 @@ class _ImagesSectionState extends State<ImagesSection> {
               final imagePath = index < widget.selectedImages.length
                   ? widget.selectedImages[index]
                   : null;
-
               return ImagePickerSlot(
-                image: imagePath != null ? File(imagePath) : null,
+                image: imagePath,
                 onAdd: _pickImages,
                 onRemove: imagePath != null ? () => _removeImage(index) : null,
               );
