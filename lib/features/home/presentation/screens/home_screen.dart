@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:loopify/features/home/data/data.dart';
 import 'package:loopify/features/home/presentation/widgets/banner_image.dart';
 import 'package:loopify/features/home/presentation/widgets/category_item.dart';
@@ -6,25 +8,34 @@ import 'package:loopify/features/home/presentation/widgets/custom_app_bar.dart';
 import 'package:loopify/features/home/presentation/widgets/custom_search_bar.dart';
 import 'package:loopify/features/home/presentation/widgets/promoted_item.dart';
 import 'package:loopify/core/widgets/section_title.dart';
-import 'package:loopify/features/listing/presentation/screens/product_details_screen.dart';
-import 'package:loopify/main.dart';
+import 'package:loopify/core/routes/routes.dart';
+import 'package:loopify/core/routes/routes_params.dart';
+import 'package:loopify/features/listing/data/providers/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
+  const HomeScreen.route(
+    BuildContext context,
+    GoRouterState state, {
+    super.key,
+  });
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productsState = ref.watch(productNotifierProvider);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
-            CustomAppBar(),
+            const CustomAppBar(),
             const SizedBox(height: 24),
-            CustomSearchBar(),
+            const CustomSearchBar(),
             const SizedBox(height: 24),
-            BannerImage(),
+            const BannerImage(),
             const SizedBox(height: 24),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -35,12 +46,12 @@ class HomeScreen extends StatelessWidget {
               height: 97,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemBuilder: (context, index) => CategoryItem(
                   label: dummyCategories[index].label,
                   imagePath: dummyCategories[index].imagePath,
                 ),
-                separatorBuilder: (_, _) => const SizedBox(width: 12),
+                separatorBuilder: (_, __) => const SizedBox(width: 12),
                 itemCount: dummyCategories.length,
               ),
             ),
@@ -50,13 +61,10 @@ class HomeScreen extends StatelessWidget {
               child: SectionTitle(label: 'Promoted Items'),
             ),
             const SizedBox(height: 20),
-            FutureBuilder(
-              future: productLocalRepository.getAllProducts(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator.adaptive());
-                }
-                if (!snapshot.hasData || snapshot.data!.isEmpty) {
+
+            productsState.when(
+              data: (products) {
+                if (products.isEmpty) {
                   return Center(
                     child: Text(
                       'No Products',
@@ -64,32 +72,39 @@ class HomeScreen extends StatelessWidget {
                     ),
                   );
                 }
-                final products = snapshot.data;
                 return GridView.builder(
-                  padding: EdgeInsets.fromLTRB(20, 4, 20, 20),
+                  padding: const EdgeInsets.fromLTRB(20, 4, 20, 20),
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 24,
                     crossAxisSpacing: 16,
                     mainAxisExtent: 260,
                   ),
-                  itemCount: products!.length,
+                  itemCount: products.length,
                   itemBuilder: (context, index) => PromotedItem(
                     product: products[index],
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              ProductDetailsScreen(product: products[index]),
-                        ),
+                      context.goNamed(
+                        AppRoutes.productDetails.name,
+                        pathParameters: {
+                          RoutesParams.productId:
+                              products[index].id.toString(),
+                        },
                       );
                     },
                   ),
                 );
               },
+              loading: () =>
+                  const Center(child: CircularProgressIndicator.adaptive()),
+              error: (error, stack) => Center(
+                child: Text(
+                  'Error: $error',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
             ),
           ],
         ),

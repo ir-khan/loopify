@@ -1,42 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:loopify/core/assets/app_assets.dart';
+import 'package:loopify/core/routes/routes.dart';
 import 'package:loopify/core/theme/colors.dart';
 import 'package:loopify/features/dashboard/presentation/widgets/nav_bar_item.dart';
-import 'package:loopify/features/home/presentation/screens/home_screen.dart';
-import 'package:loopify/features/listing/presentation/screens/all_listings_screen.dart';
-import 'package:loopify/features/listing/presentation/screens/create_listing_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({super.key});
+  final Widget child;
+
+  const DashboardScreen({super.key, required this.child});
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    const dashboardScreen = [
-      HomeScreen(),
-      AllListingsScreen(),
-      ChatScreen(),
-      SettingScreen(),
-    ];
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: dashboardScreen[_currentIndex],
+      body: widget.child,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => CreateListingScreen()),
-          ).then((val) {
-            // if (val) {
-            setState(() {});
-            // }
-          });
+          context.goNamed(AppRoutes.productAdd.name);
         },
         child: Container(
           width: 32,
@@ -61,15 +48,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   selectedSvg: AppAssets.homeFilled,
                   unselectedSvg: AppAssets.home,
                   label: 'Home',
-                  isSelected: _currentIndex == 0,
-                  onTap: () => setState(() => _currentIndex = 0),
+                  isSelected:
+                      GoRouter.of(context).state.name == AppRoutes.home.name,
+                  onTap: () => context.goNamed(AppRoutes.home.name),
                 ),
                 NavBarItem(
                   selectedSvg: AppAssets.layoutFilled,
                   unselectedSvg: AppAssets.layout,
                   label: 'Categories',
-                  isSelected: _currentIndex == 1,
-                  onTap: () => setState(() => _currentIndex = 1),
+                  isSelected:
+                      GoRouter.of(context).state.name ==
+                      AppRoutes.categories.name,
+                  onTap: () => context.goNamed(AppRoutes.categories.name),
                 ),
               ],
             ),
@@ -80,15 +70,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   selectedSvg: AppAssets.chatFilled,
                   unselectedSvg: AppAssets.chat,
                   label: 'Chat',
-                  isSelected: _currentIndex == 2,
-                  onTap: () => setState(() => _currentIndex = 2),
+                  isSelected:
+                      GoRouter.of(context).state.name == AppRoutes.chat.name,
+                  onTap: () => context.goNamed(AppRoutes.chat.name),
                 ),
                 NavBarItem(
                   selectedSvg: AppAssets.settingFilled,
                   unselectedSvg: AppAssets.setting,
                   label: 'Settings',
-                  isSelected: _currentIndex == 3,
-                  onTap: () => setState(() => _currentIndex = 3),
+                  isSelected:
+                      GoRouter.of(context).state.name ==
+                      AppRoutes.settings.name,
+                  onTap: () => context.goNamed(AppRoutes.settings.name),
                 ),
               ],
             ),
@@ -102,6 +95,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
 
+  const ChatScreen.route(
+    BuildContext context,
+    GoRouterState state, {
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
@@ -113,6 +112,12 @@ class ChatScreen extends StatelessWidget {
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
+
+  const SettingScreen.route(
+    BuildContext context,
+    GoRouterState state, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

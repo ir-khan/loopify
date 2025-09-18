@@ -1,31 +1,35 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:loopify/core/routes/routes.dart';
+import 'package:loopify/core/routes/routes_params.dart';
 import 'package:loopify/core/theme/colors.dart';
 import 'package:loopify/core/utils/formaters.dart';
-import 'package:loopify/features/listing/presentation/screens/create_listing_screen.dart';
-import 'package:loopify/main.dart';
+import 'package:loopify/features/listing/data/providers/provider.dart';
 
-class AllListingsScreen extends StatefulWidget {
+class AllListingsScreen extends ConsumerWidget {
   const AllListingsScreen({super.key});
 
+  const AllListingsScreen.route(
+    BuildContext context,
+    GoRouterState state, {
+    super.key,
+  });
   @override
-  State<AllListingsScreen> createState() => _AllListingsScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productsAsync = ref.watch(productNotifierProvider);
 
-class _AllListingsScreenState extends State<AllListingsScreen> {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: FutureBuilder(
-          future: productLocalRepository.getAllProducts(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator.adaptive());
-            }
-            if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        child: productsAsync.when(
+          loading: () =>
+              const Center(child: CircularProgressIndicator.adaptive()),
+          error: (err, st) => Center(child: Text('Error: $err')),
+          data: (products) {
+            if (products.isEmpty) {
               return Center(
                 child: Text(
                   'No Products',
@@ -33,27 +37,31 @@ class _AllListingsScreenState extends State<AllListingsScreen> {
                 ),
               );
             }
-            final products = snapshot.data;
-
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: ListView.separated(
-                itemCount: products!.length,
+                itemCount: products.length,
                 itemBuilder: (context, index) => Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: ListTile(
                     onTap: () async {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              CreateListingScreen(product: products[index]),
-                        ),
-                      ).then((val) {
-                        // if (val) {
-                        setState(() {});
-                        // }
-                      });
+                      context.goNamed(
+                        AppRoutes.productEdit.name,
+                        pathParameters: {
+                          RoutesParams.productId: products[index].id.toString(),
+                        },
+                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) =>
+                      //         CreateListingScreen(product: products[index]),
+                      //   ),
+                      // ).then((val) {
+                      //   // if (val) {
+                      //   setState(() {});
+                      //   // }
+                      // });
                     },
                     leading: products[index].imagePaths[0].startsWith('/')
                         ? Image.file(
@@ -81,11 +89,16 @@ class _AllListingsScreenState extends State<AllListingsScreen> {
                       ),
                     ),
                     trailing: IconButton(
-                      onPressed: () {
-                        productLocalRepository.deleteProductById(
-                          products[index].id!,
+                      onPressed: () async {
+                        await ref
+                            .read(productNotifierProvider.notifier)
+                            .deleteProduct(products[index].id!);
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Product deleted successfully'),
+                          ),
                         );
-                        setState(() {});
                       },
                       icon: Icon(
                         Icons.delete_outline_rounded,
